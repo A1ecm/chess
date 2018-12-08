@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Original Chess</title>
+    <link href="stylesheets/style.css" rel="stylesheet" type="text/css">
+    <link href="stylesheets/game.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Merienda+One' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+    <main>
+        <div>
+            <!-- <section id="players">
+            <p id="p1" class="players">Player 1</p>
+            <p id="p2" class="players">Player 2</p>
+        </section> -->
+            <table class="chessboard">
+                <tr class="chessboard">
+                    <td id="a8" class="chessboard" onclick="showMoves()">&#9820</td>
+                    <td id="b8" class="chessboard">&#9822</td>
+                    <td id="c8" class="chessboard">&#9821</td>
+                    <td id="d8" class="chessboard">&#9819</td>
+                    <td id="e8" class="chessboard">&#9818</td>
+                    <td id="f8" class="chessboard">&#9821</td>
+                    <td id="g8" class="chessboard">&#9822</td>
+                    <td id="h8" class="chessboard">&#9820</td>
+                </tr>
+                <tr class="chessboard">
+                    <td id="a7" class="chessboard">&#9823</td>
+                    <td id="b7" class="chessboard">&#9823</td>
+                    <td id="c7" class="chessboard">&#9823</td>
+                    <td id="d7" class="chessboard">&#9823</td>
+                    <td id="e7" class="chessboard">&#9823</td>
+                    <td id="f7" class="chessboard">&#9823</td>
+                    <td id="g7" class="chessboard">&#9823</td>
+                    <td id="h7" class="chessboard">&#9823</td>
+                </tr>
+                <tr class="chessboard">
+                    <td id="a6" class="chessboard"></td>
+                    <td id="b6" class="chessboard"></td>
+                    <td id="c6" class="chessboard"></td>
+                    <td id="d7" class="chessboard"></td>
+                    <td id="e6" class="chessboard"></td>
+                    <td id="f6" class="chessboard"></td>
+                    <td id="g6" class="chessboard"></td>
+                    <td id="h6" class="chessboard"></td>
+                </tr>
+                <tr class="chessboard">
+                    <td id="a5" class="chessboard"></td>
+                    <td id="b5" class="chessboard"></td>
+                    <td id="c5" class="chessboard"></td>
+                    <td id="d5" class="chessboard"></td>
+                    <td id="e5" class="chessboard"></td>
+                    <td id="f5" class="chessboard"></td>
+                    <td id="g5" class="chessboard"></td>
+                    <td id="h5" class="chessboard"></td>
+                </tr>
+                <tr class="chessboard">
+                    <td id="a4" class="chessboard"></td>
+                    <td id="b4" class="chessboard"></td>
+                    <td id="c4" class="chessboard"></td>
+                    <td id="d4" class="chessboard"></td>
+                    <td id="e4" class="chessboard"></td>
+                    <td id="f4" class="chessboard"></td>
+                    <td id="g4" class="chessboard"></td>
+                    <td id="h4" class="chessboard"></td>
+                </tr>
+                <tr class="chessboard">
+                    <td id="a3" class="chessboard"></td>
+                    <td id="b3" class="chessboard"></td>
+                    <td id="c3" class="chessboard"></td>
+                    <td id="d3" class="chessboard"></td>
+                    <td id="e3" class="chessboard"></td>
+                    <td id="f3" class="chessboard"></td>
+                    <td id="g3" class="chessboard"></td>
+                    <td id="h3" class="chessboard"></td>
+                </tr>
+                <tr class="chessboard">
+                    <td id="a2" class="chessboard">&#9817</td>
+                    <td id="b2" class="chessboard">&#9817</td>
+                    <td id="c2" class="chessboard">&#9817</td>
+                    <td id="d2" class="chessboard">&#9817</td>
+                    <td id="e2" class="chessboard">&#9817</td>
+                    <td id="f2" class="chessboard">&#9817</td>
+                    <td id="g2" class="chessboard">&#9817</td>
+                    <td id="h2" class="chessboard">&#9817</td>
+                </tr>
+                <tr class="chessboard">
+                    <td id="a1" class="chessboard">&#9814</td>
+                    <td id="b1" class="chessboard">&#9816</td>
+                    <td id="c1" class="chessboard">&#9815</td>
+                    <td id="d1" class="chessboard">&#9813</td>
+                    <td id="e1" class="chessboard">&#9812</td>
+                    <td id="f1" class="chessboard">&#9815</td>
+                    <td id="g1" class="chessboard">&#9816</td>
+                    <td id="h1" class="chessboard">&#9814</td>
+                </tr>
+            </table>
+            <section id="pieces">
+            </section>
+            <section id="pastMoves" class="window">
+                <h2 id="p1show">Player 1</h2>
+                <div class="movesWindow">
+                    <table class="movesTable">
+                        <tr id="row1" class="movesTable">
+                            <td id="count" class="movesTable">Count</td>
+                            <td id="moveWhite" class="movesTable">White</td>
+                            <td id="moveBlack" class="movesTable">Black</td>
+                        </tr>
+
+
+                        <!-- <h5>Count moves</h5>
+                    <ol id="moveslist">
+                        <li>-</li>
+                    </ol> -->
+                    </table>
+                </div>
+                <div id="buttons" class="changeGame">
+                    <button id="forfeit"><img class="imgControl" src="images/forfeit.png"></button>
+                    <button id="draw"><img class="imgControl" src="images/draw.png"></button>
+                    <button id="restart"><img class="imgControl" src="images/restart.png"></button>
+                    <button id="return"><img class="imgControl" src="images/return.png"></button>
+                </div>
+                <h2 id="p2show">Player 2</h2>
+            </section>
+        </div>
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="../node_modules/chess.js/chess.js"></script>
+    <script src="./javascripts/move.js"></script>
+    <script src="../game.js"></script>
+    <script></script>
+</body>
+
+</html>
