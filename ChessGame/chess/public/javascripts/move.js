@@ -1,7 +1,6 @@
-var Chess = require('../../node_modules/chess.js/chess').Chess;
+// var Chess = require('../../node_modules/chess.js/chess').Chess;
 var chess = new Chess();
 
-alert("game.js started.");
 
 window.onload = function () {
     document.getElementById("a2").addEventListener("click", clicked);
