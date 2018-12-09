@@ -1,4 +1,4 @@
-var Chess = require('../../node_modules/chess.js/chess').Chess;
+var Chess = require('./node_modules/chess.js/chess').Chess;
 
 /* every game has two players, identified by their WebSocket */
 var game = function (gameID) {
