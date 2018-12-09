@@ -10,7 +10,6 @@ function main(){
             pieceSelect = true;
             alert(chess.moves({square: event.target.id}));
         }
-       
     
     });
 
