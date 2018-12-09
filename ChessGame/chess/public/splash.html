@@ -2,6 +2,9 @@
 <html>
 	<head>
 		<title>Classic Chess</title>
+		<link href="stylesheets/style.css" rel="stylesheet" type="text/css">
+    	<link href="stylesheets/splash.css" rel="stylesheet" type="text/css">
+    	<link href='http://fonts.googleapis.com/css?family=Merienda+One' rel='stylesheet' type='text/css'>
 	</head>
 	<body>
 		<header>
@@ -9,7 +12,7 @@
 		</header>
 
 		<main>
-			<section id="button">
+			<section id="button" class="playGame">
 				<form action="/play" method="get">
                     <button type="submit">PLAY</button>
                 </form>
@@ -17,10 +20,12 @@
 		</main>
 
 		<footer>
-			<ul>
-				<li> Active Games</li>
-				<li> Games Played</li>
-			</ul>
+			<div class="table">
+				<ul class="statistics">
+					<li> Active Games</li>
+					<li> Games Played</li>
+				</ul>
+			</div>
 		</footer>
 	</body>
 </html>
