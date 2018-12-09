@@ -1,0 +1,28 @@
+h1 {
+    font-size: 400%;
+    text-align: center;
+    line-height: 200px;
+    color:black;
+}
+
+.playGame {
+    text-align: center;
+    line-height: 200px;
+    color: black;
+    font-size: 80px;
+}
+
+.table {
+	display: table;   /* Allow the centering to work */
+    margin: 0 auto;
+    float: right;
+}
+
+.statistics {
+    list-style: none;
+    font-size: 150%;
+    text-align: left;
+    padding: 0px;
+    color:black;
+    border: 2px solid black;
+}
