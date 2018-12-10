@@ -32,7 +32,7 @@ h1 {
     color:burlywood;
     background-color: rgba(132, 66, 30, 0.9);
     font-size: 80px;
-    border: none;
+    border: 5px solid rgb(230, 184, 135);
 }
 
 .table {

@@ -5,6 +5,7 @@ var websocket = require("ws");
 var indexRouter = require("./routes/index");
 var messages = require("./public/javascripts/messages");
 
+
 var gameStatus = require("./statTracker");
 var Game = require("./game");
 
@@ -25,7 +26,6 @@ var server = http.createServer(app);
 const wss = new websocket.Server({ server });
 
 var websockets = {};//property: websocket, value: game
-
 /*
  * regularly clean up the websockets object
  */
