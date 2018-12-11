@@ -85,6 +85,14 @@ game.prototype.getChess = function(){
   return this.chess;
 }
 
+game.prototype.getMoves = function(space){
+  return this.chess.moves({square: space});
+}
+
+game.prototype.makeMove = function(origin, destination){
+  this.chess.move({from: origin, to: destination});
+}
+
 game.prototype.addPlayer = function (p) {
 
   console.assert(p instanceof Object, "%s: Expecting an object (WebSocket), got a %s", arguments.callee.name, typeof p);

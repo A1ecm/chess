@@ -72,13 +72,28 @@ wss.on("connection", function connection(ws) {
         currentGame = new Game(gameStatus.gamesInitialized++);
     }
 
+    
     /*
      * message coming in from a player:
      *  1. determine the game object
      *  2. determine the opposing player OP
      *  3. send the message to OP 
      */ 
-    // con.on("message", function incoming(message) {
+    con.on("message", function incoming(message) {
+        let oMsg = JSON.parse(message);
+ 
+        let gameObj = websockets[con.id];
+        let isPlayerA = (gameObj.playerA == con) ? true:false;
+
+        if (oMsg.type == messages.T_SELECT_A_PIECE) {
+            console.log("selected piece: " + oMsg.data);
+            console.log("moves " + gameObj.getMoves(oMsg.data));
+            
+            let msg = messages.O_AVAILABLE_MOVES;
+            msg.data = gameObj.getMoves(oMsg.data);
+            con.send(JSON.stringify(msg));
+        }
+    });
 
     con.on("close", function (code) {
         

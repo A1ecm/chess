@@ -4,12 +4,16 @@
 
 function main(){
     "use strict";
-    var pieceSelect = false;
+    
     $(".chessboard td").on("click", function(event){
         if(event.target.innerHTML != ""){
-            pieceSelect = true;
+            var space = event.target.id;
+            var outgoingMsg = Messages.O_SELECT_A_PIECE;
             
+            outgoingMsg.data = space;
+            socketSend(outgoingMsg);
         } 
+
     });
 
 };
