@@ -85,12 +85,25 @@ wss.on("connection", function connection(ws) {
         let gameObj = websockets[con.id];
         let isPlayerA = (gameObj.playerA == con) ? true:false;
 
+        //incoming message with which piece is selected returns an array with possible moves                                        
         if (oMsg.type == messages.T_SELECT_A_PIECE) {
             console.log("selected piece: " + oMsg.data);
             
             let msg = messages.O_AVAILABLE_MOVES;
             msg.data = gameObj.getMoves(oMsg.data);
+            console.log(gameObj.getMoves());
             con.send(JSON.stringify(msg));
+        }
+
+        if(oMsg.type == messages.T_MAKE_A_MOVE) {
+            console.log("Move made by ", playerType);
+
+            gameObj.makeMove(oMsg.data);
+            
+            let moveMsg = messages.O_MOVE_MADE;
+            moveMsg.data = oMsg.data;
+            gameObj.playerA.send(JSON.stringify(moveMsg));
+            gameObj.playerB.send(JSON.stringify(moveMsg));
         }
     });
 

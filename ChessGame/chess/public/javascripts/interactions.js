@@ -28,11 +28,15 @@ function showMoves(ids) {
     $("layer.layer").css("background-color","");
     for (var i = 0; i < arrayLength; i++) {
         let potspace = ids[i];
-        if(potspace.length > 2){
+        console.log("Voor error...", potspace);
+        if(potspace.length == 3){
            potspace = potspace.substring(potspace.length -2);
         }
-
-        document.getElementById(potspace).firstChild.style.backgroundColor = "#618757";
+        else if(potspace.length == 4){
+            potspace = potspace.substring(potspace.length -3);
+         }
+        console.log("Na error...", potspace);
+        document.getElementById(potspace).style.backgroundColor = "#618757";
     }
 }
 
@@ -50,7 +54,6 @@ function showMoves(ids) {
 
     socket.onmessage = function (event) {
         let incomingMsg = JSON.parse(event.data);
-        console.log("data incoming");
 
         //set player type
         if (incomingMsg.type == "PLAYER-TYPE") {
@@ -61,6 +64,13 @@ function showMoves(ids) {
         if( incomingMsg.type == Messages.T_AVAILABLE_MOVES){
             showMoves(incomingMsg.data);
             arrayInput(incomingMsg.data);
+        }
+
+        if(incomingMsg.type == Messages.T_MOVE_MADE){
+            $("layer.layer").css("background-color", "");
+            console.log(incomingMsg.data);
+            document.getElementById(incomingMsg.data[1]).innerHTML = document.getElementById(incomingMsg.data[0]).innerHTML;
+            document.getElementById(incomingMsg.data[0]).innerHTML = "";
         }
     };
 

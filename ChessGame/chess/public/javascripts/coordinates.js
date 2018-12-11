@@ -9,30 +9,33 @@ function main() {
     "use strict";
 
     $(".chessboard td").on("click", function (event) {
-        if(selected == false){
+        if (selected == false) {
             selectNewPiece(event);
             selPiece = event.target.id;
             selected = true;
         }
-        else{
-            for(var i = 0; i < nextPossible.lenght; i++){
+        else {
+            for (var i = 0; i < nextPossible.length; i++) {
                 let selPos = nextPossible[i];
-                if(selPos.length > 2){
-                   selPos = selPos.substring(selPos.length -2);
+                if (selPos.length > 2) {
+                    selPos = selPos.substring(selPos.length - 2);
                 }
-                if(selPos === selPiece){
-                   getElementById(selPiece).innerHTML = "A";
-                   // send to server 
-                   selPiece = false;
-                   i = nextPossible.lenght;
+                if (selPos == event.target.id) {
+                    // send to server 
+                    var outgoingMsg = Messages.O_MAKE_A_MOVE;
+                    var moveArray = [selPiece, selPos];
+                    outgoingMsg.data = moveArray;
+                    socketSend(outgoingMsg);
+                    selected = false;
+                    i = nextPossible.length;
                 }
             }
-            if(selPiece = true){
+            if (selected == true) {
                 selectNewPiece(event);
                 selPiece = event.target.id;
             }
         }
-       
+
 
     });
 
@@ -48,6 +51,6 @@ function selectNewPiece(event) {
     }
 }
 
-function arrayInput(nextMoves){
+function arrayInput(nextMoves) {
     nextPossible = nextMoves;
 }
