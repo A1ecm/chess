@@ -87,7 +87,6 @@ wss.on("connection", function connection(ws) {
 
         if (oMsg.type == messages.T_SELECT_A_PIECE) {
             console.log("selected piece: " + oMsg.data);
-            console.log("moves " + gameObj.getMoves(oMsg.data));
             
             let msg = messages.O_AVAILABLE_MOVES;
             msg.data = gameObj.getMoves(oMsg.data);

@@ -25,17 +25,17 @@ function socketSend(message){
 //Change possible moves elements color; returns the unshow Function to can be called immediately without need to parse the array again
 function showMoves(ids) {
     var arrayLength = ids.length;
+    $("layer.layer").css("background-color","");
     for (var i = 0; i < arrayLength; i++) {
-        document.getElementById(ids[i]).firstChild.style.backgroundColor = "#618757";
-    }
-    return unshowMoves(ids);
-}
-function unshowMoves(ids) {
-    var arrayLength = ids.length;
-    for (var i = 0; i < arrayLength; i++) {
-        document.getElementById(ids[i]).firstChild.style.backgroundColor = "none";
+        let potspace = ids[i];
+        if(potspace.length > 2){
+           potspace = potspace.substring(potspace.length -2);
+        }
+
+        document.getElementById(potspace).firstChild.style.backgroundColor = "#618757";
     }
 }
+
 
 
 
@@ -60,6 +60,7 @@ function unshowMoves(ids) {
         
         if( incomingMsg.type == Messages.T_AVAILABLE_MOVES){
             showMoves(incomingMsg.data);
+            arrayInput(incomingMsg.data);
         }
     };
 
