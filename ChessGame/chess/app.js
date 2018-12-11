@@ -91,7 +91,7 @@ wss.on("connection", function connection(ws) {
             
             let msg = messages.O_AVAILABLE_MOVES;
             msg.data = gameObj.getMoves(oMsg.data);
-            console.log(gameObj.getMoves());
+            console.log(gameObj.getMoves(oMsg.data));
             con.send(JSON.stringify(msg));
         }
 

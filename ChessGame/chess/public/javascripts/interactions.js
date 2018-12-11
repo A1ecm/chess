@@ -29,12 +29,9 @@ function showMoves(ids) {
     for (var i = 0; i < arrayLength; i++) {
         let potspace = ids[i];
         console.log("Voor error...", potspace);
-        if(potspace.length == 3){
+        if(potspace.length > 2){
            potspace = potspace.substring(potspace.length -2);
         }
-        else if(potspace.length == 4){
-            potspace = potspace.substring(potspace.length -3);
-         }
         console.log("Na error...", potspace);
         document.getElementById(potspace).style.backgroundColor = "#618757";
     }

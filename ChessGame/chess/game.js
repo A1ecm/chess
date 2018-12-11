@@ -91,6 +91,7 @@ game.prototype.getMoves = function(space){
 
 game.prototype.makeMove = function(pathArray){
   this.chess.move({from: pathArray[0], to: pathArray[1]});
+  console.log(this.chess.ascii());
 }
 
 game.prototype.addPlayer = function (p) {
