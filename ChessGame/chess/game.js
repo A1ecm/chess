@@ -93,6 +93,9 @@ game.prototype.makeMove = function(pathArray){
   this.chess.move({from: pathArray[0], to: pathArray[1]});
   console.log(this.chess.ascii());
 }
+game.prototype.checkmate = function(){
+  return this.chess.in_checkmate();
+}
 
 game.prototype.addPlayer = function (p) {
   console.assert(p instanceof Object, "%s: Expecting an object (WebSocket), got a %s", arguments.callee.name, typeof p);

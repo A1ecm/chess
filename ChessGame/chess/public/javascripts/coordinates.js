@@ -18,7 +18,12 @@ function main() {
             for (var i = 0; i < nextPossible.length; i++) {
                 let selPos = nextPossible[i];
                 if (selPos.length > 2) {
-                    selPos = selPos.substring(selPos.length - 2);
+                    if(selPos.includes("+") || selPos.includes("#")){
+                        selPos = selPos.substring(selPos.length -3, selPos.length-1);
+                    }
+                    else{
+                        selPos = selPos.substring(selPos.length -2);
+                    }
                 }
                 if (selPos == event.target.id) {
                     // send to server 

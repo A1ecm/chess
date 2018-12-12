@@ -30,7 +30,12 @@ function showMoves(ids) {
         let potspace = ids[i];
         console.log("Voor error...", potspace);
         if(potspace.length > 2){
-           potspace = potspace.substring(potspace.length -2);
+            if(potspace.includes("+") || potspace.includes("#")){
+                potspace = potspace.substring(potspace.length -3, potspace.length-1);
+            }
+            else{
+                potspace = potspace.substring(potspace.length -2);
+            }
         }
         console.log("Na error...", potspace);
         document.getElementById(potspace).style.backgroundColor = "#618757";
@@ -68,6 +73,10 @@ function showMoves(ids) {
             console.log(incomingMsg.data);
             document.getElementById(incomingMsg.data[1]).innerHTML = document.getElementById(incomingMsg.data[0]).innerHTML;
             document.getElementById(incomingMsg.data[0]).innerHTML = "";
+        }
+
+        if(incomingMsg.type == Messages.T_GAME_WON_BY) {
+            alert(incomingMsg.data + " won the game!");
         }
     };
 

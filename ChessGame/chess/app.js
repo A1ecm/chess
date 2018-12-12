@@ -71,8 +71,6 @@ wss.on("connection", function connection(ws) {
     if (currentGame.hasTwoConnectedPlayers()) {
         currentGame = new Game(gameStatus.gamesInitialized++);
     }
-
-    
     /*
      * message coming in from a player:
      *  1. determine the game object
@@ -104,6 +102,16 @@ wss.on("connection", function connection(ws) {
             moveMsg.data = oMsg.data;
             gameObj.playerA.send(JSON.stringify(moveMsg));
             gameObj.playerB.send(JSON.stringify(moveMsg));
+            
+            if(gameObj.checkmate()){
+                let winMsg = messages.O_GAME_WON_BY;
+                console.log(playerType + " won");
+                var winner = playerType;
+                winMsg.data = winner;
+                
+                gameObj.playerA.send(JSON.stringify(winMsg));
+                gameObj.playerB.send(JSON.stringify(winMsg));
+            }
         }
     });
 
