@@ -158,7 +158,7 @@ function showMoves(ids) {
 
 async function winGame(winner){
     alert("Player "+ winner + " wins!");
-    await sleep(3000);
+    await sleep(5000);
     window.location="../splash.html";
 }
 
@@ -177,13 +177,13 @@ async function askDraw(player){
 
 async function drawGame() {
     alert("It's a draw");
-    await sleep(3000);
+    await sleep(5000);
     window.location="../splash.html";
 }
 
 async function abortGame(){
     alert("Game aborted");
-    await sleep(3000);
+    await sleep(5000);
     window.location="../splash.html";
 }
 
