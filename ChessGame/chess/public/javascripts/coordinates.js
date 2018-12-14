@@ -7,24 +7,24 @@ var nextPossible;
 
 function main() {
     "use strict";
-
+    
     $(".chessboard td").on("click", function (event) {
-        console.log(selected);
-        if (selected == false || nextPossible == undefined) {
+        //console.log(selected);
+        if ((selected == false || nextPossible == undefined) && event.target.id != "") {
             selectNewPiece(event);
             selPiece = event.target.id;
-            
+            console.log(event.target.type);
             selected = true;
         }
         else {
             for (var i = 0; i < nextPossible.length; i++) {
                 let selPos = nextPossible[i];
                 if (selPos.length > 2) {
-                    if(selPos.includes("+") || selPos.includes("#")){
-                        selPos = selPos.substring(selPos.length -3, selPos.length-1);
+                    if (selPos.includes("+") || selPos.includes("#")) {
+                        selPos = selPos.substring(selPos.length - 3, selPos.length - 1);
                     }
-                    else{
-                        selPos = selPos.substring(selPos.length -2);
+                    else {
+                        selPos = selPos.substring(selPos.length - 2);
                     }
                 }
                 if (selPos == event.target.id) {
@@ -35,11 +35,11 @@ function main() {
                     socketSend(outgoingMsg);
                     selected = false;
                     i = nextPossible.length;
-                    
+
                 }
                 else {
                     selected = false;
-                    $("layer.layer").css("background-color","");
+                    $("layer.layer").css("background-color", "");
                 }
 
             }

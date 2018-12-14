@@ -96,6 +96,10 @@ game.prototype.makeMove = function(pathArray){
 game.prototype.checkmate = function(){
   return this.chess.in_checkmate();
 }
+game.prototype.goodEnd = function(){
+  if(this.chess.in_checkmate() || this.chess.in_draw() || thiss.chess.in_stalemate())
+  return true;
+}
 
 game.prototype.turn = function(piece){
   console.log(piece);

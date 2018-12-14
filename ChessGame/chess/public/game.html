@@ -88,7 +88,7 @@
                 </tr>
                 <tr class="chessboard">
                     <td class="chessboard"><layer id="a1" class="layer">&#9814</layer></td>
-                    <td class="chessboard"><layer id="b1"  class="layer">&#9816</layer></td>
+                    <td class="chessboard"><layer id="b1" class="layer">&#9816</layer></td>
                     <td class="chessboard"><layer id="c1" class="layer">&#9815</layer></td>
                     <td class="chessboard"><layer id="d1" class="layer">&#9813</layer></td>
                     <td class="chessboard"><layer id="e1" class="layer">&#9812</layer></td>
@@ -118,11 +118,9 @@
                 </div>
                 <div id="buttons" class="changeGame">
                     <button id="forfeit" onclick ="forfeit()"><img class="imgControl" src="images/forfeit.png"></button>
-                    <button id="draw"><img class="imgControl" src="images/draw.png"></button>
+                    <button id="draw" onclick="draw()"><img class="imgControl" src="images/draw.png"></button>
                     <!-- <button id="restart"><img class="imgControl" src="images/restart.png"></button> -->
-                    <form action="/" method="get"></form>
                         <button id="return" onclick ="goMain()"><img class="imgControl" src="images/return.png"></button>
-                    </form>
                 </div>
                 <h2 id="pBshow">Player B</h2>
             </section>

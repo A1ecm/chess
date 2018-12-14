@@ -90,6 +90,15 @@
     };
 
     /**
+     * Server to client: ready to start a game;
+     */
+    exports.T_START = "START";
+    exports.O_START = {
+        type: exports.T_START,
+        data: null
+    };
+
+    /**
      * Client to server: Forfeit
      */
     exports.T_FORFEIT = "FORFEIT";
@@ -98,6 +107,32 @@
         data: null
     };
 
+    /**
+     * Player A or B to server and server to Player A or B: DRAW
+     */
+    exports.T_DRAW = "DRAW";
+    exports.O_DRAW = {
+        type: exports.T_DRAW,
+        data: null
+    };
+
+    /**
+     * Player A or B to server and server to Player A or B: ASK FOR DRAW
+     */
+    exports.T_ASK_DRAW = "ASK-DRAW";
+    exports.O_ASK_DRAW = {
+        type: exports.T_ASK_DRAW,
+        data: null
+    };
+
+     /**
+     * Player A or B to server and server to Player A or B: DRAW DENIED
+     */
+    exports.T_DRAW_DENIED = "DRAW-DENIED";
+    exports.O_DRAW_DENIED = {
+        type: exports.T_DRAW_DENIED,
+        data: null
+    };
 
     /* 
      * Server to Player A & B: game over with result won/loss 

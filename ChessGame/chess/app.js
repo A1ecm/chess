@@ -69,7 +69,10 @@ wss.on("connection", function connection(ws) {
      * if a player now leaves, the game is aborted (player is not preplaced)
      */
     if (currentGame.hasTwoConnectedPlayers()) {
+        currentGame.playerA.send(JSON.stringify(messages.O_START));
+        currentGame.playerB.send(JSON.stringify(messages.O_START));
         currentGame = new Game(gameStatus.gamesInitialized++);
+        
     }
     /*
      * message coming in from a player:
@@ -177,6 +180,31 @@ wss.on("connection", function connection(ws) {
             gameObj.playerA.send(JSON.stringify(winMsg));
             gameObj.playerB.send(JSON.stringify(winMsg));
         }
+
+        if(oMsg.type == messages.T_ASK_DRAW) {
+            let drawMsg = messages.O_ASK_DRAW;
+            drawMsg.data = playerType;
+            if(playerType == "A")
+                gameObj.playerB.send(JSON.stringify(drawMsg));
+            if(playerType == "B")
+                gameObj.playerA.send(JSON.stringify(drawMsg));
+        }
+
+        if(oMsg.type == messages.T_DRAW){
+            let conDrawMsg = messages.O_DRAW;
+            gameObj.playerA.send(JSON.stringify(conDrawMsg));
+            gameObj.playerB.send(JSON.stringify(conDrawMsg));
+        }
+
+        if(oMsg.type == messages.T_DRAW_DENIED){
+            let denDrawMsg = messages.O_DRAW_DENIED;
+            denDrawMsg.data = playerType;
+            if(playerType == "A")
+                gameObj.playerB.send(JSON.stringify(denDrawMsg));
+            if(playerType == "B")
+                gameObj.playerA.send(JSON.stringify(denDrawMsg))
+        }
+
     });
 
     con.on("close", function (code) {
@@ -196,6 +224,7 @@ wss.on("connection", function connection(ws) {
             if (gameObj.isValidTransition(gameObj.gameState, "ABORTED")) {
                 gameObj.setStatus("ABORTED");
                 gameStatus.gamesAborted++;
+                
 
                 /*
                  * determine whose connection remains open;

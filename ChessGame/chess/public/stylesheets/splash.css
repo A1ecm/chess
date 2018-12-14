@@ -1,3 +1,14 @@
+@media (max-width: 1000px) {
+    body {
+      display: none;
+    }
+
+    body::after{
+    content: "Your screen is too small, buy a bigger one";
+    }
+  }
+
+
 *{
     -webkit-user-select:none;
     -khtml-user-select:none;
@@ -16,6 +27,7 @@ body {
     background-position: relative;
     background-repeat: no-repeat;
     background-size: cover;
+    font: 100px, white;
     
 }
 header{
