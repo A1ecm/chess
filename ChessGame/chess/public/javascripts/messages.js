@@ -53,6 +53,13 @@
         type: exports.T_AVAILABLE_MOVES,
         data: null
     };
+
+    exports.T_NOT_YOUR_MOVE = "NOT_YOUR_MOVE";
+    exports.O_NOT_YOUR_MOVE = {
+        type: exports.T_NOT_YOUR_MOVE,
+        data: "Not your move"
+    };
+    exports.S_NOT_YOUR_MOVE = JSON.stringify(exports.O_NOT_YOUR_MOVE);
     
 
     /* 
@@ -64,7 +71,7 @@
         data: null
     };
 
-        /**
+    /**
      * Server to client: Move made
      */
     exports.T_MOVE_MADE = "MOVE-MADE";
@@ -72,8 +79,26 @@
         type: exports.T_MOVE_MADE,
         data: null
     };
-
     
+    /**
+     * Server to client: History
+     */
+    exports.T_HISTORY = "HISTORY";
+    exports.O_HISTORY = {
+        type: exports.T_HISTORY,
+        data: null
+    };
+
+    /**
+     * Client to server: Forfeit
+     */
+    exports.T_FORFEIT = "FORFEIT";
+    exports.O_FORFEIT = {
+        type: exports.T_FORFEIT,
+        data: null
+    };
+
+
     /* 
      * Server to Player A & B: game over with result won/loss 
      */

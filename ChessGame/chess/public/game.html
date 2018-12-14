@@ -10,7 +10,7 @@
 
 <body>
     <main>
-        <div>
+        <div id="totalwindow">
             <!-- <sectionss id="players">
             <p id="p1" class="players">Player 1</p>
             <p id="p2" class="players">Player 2</p>
@@ -102,7 +102,7 @@
             <section id="pastMoves" class="window">
                 <h2 id="p1show">Player 1</h2>
                 <div class="movesWindow">
-                    <table class="movesTable">
+                    <table id = "movesTable" class="movesTable">
                         <tr id="row1" class="movesTable">
                             <td id="count" class="movesTable">Count</td>
                             <td id="moveWhite" class="movesTable">White</td>
@@ -117,10 +117,12 @@
                     </table>
                 </div>
                 <div id="buttons" class="changeGame">
-                    <button id="forfeit"><img class="imgControl" src="images/forfeit.png"></button>
+                    <button id="forfeit" onclick ="forfeit()"><img class="imgControl" src="images/forfeit.png"></button>
                     <button id="draw"><img class="imgControl" src="images/draw.png"></button>
-                    <button id="restart"><img class="imgControl" src="images/restart.png"></button>
-                    <button id="return"><img class="imgControl" src="images/return.png"></button>
+                    <!-- <button id="restart"><img class="imgControl" src="images/restart.png"></button> -->
+                    <form action="/" method="get"></form>
+                        <button id="return" onclick ="goMain()"><img class="imgControl" src="images/return.png"></button>
+                    </form>
                 </div>
                 <h2 id="p2show">Player 2</h2>
             </section>
@@ -133,6 +135,7 @@
     <script src="./javascripts/move.js"></script>
     <script src="./javascripts/coordinates.js"></script>
     <script src="./javascripts/interactions.js"></script>
+    <script src="./javascripts/buttons.js"></script>
    
     <!-- <script src="../game.js"></script> -->
     <script></script>

@@ -97,6 +97,16 @@ game.prototype.checkmate = function(){
   return this.chess.in_checkmate();
 }
 
+game.prototype.turn = function(piece){
+  console.log(piece);
+  console.log(this.chess.get(piece));
+  return this.chess.get(piece).color;
+}
+
+game.prototype.getHistory = function(){
+  return this.chess.history();
+}
+
 game.prototype.addPlayer = function (p) {
   console.assert(p instanceof Object, "%s: Expecting an object (WebSocket), got a %s", arguments.callee.name, typeof p);
 

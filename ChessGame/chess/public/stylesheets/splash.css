@@ -1,14 +1,29 @@
+*{
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    -o-user-select:none;
+    user-select:none;
+    font-family: "Calibri", sans-serif;
+
+  }
 body {
     overflow: hidden;
     background-image: url(../images/Background\ chess\ splashscreen2.jpg);
     height: 600px;
-  background-position: center;
-  background-position: relative;
-  background-repeat: no-repeat;
-  background-size: cover;
-  
+    background-position: center;
+    background-position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
 }
-
+header{
+    animation-duration: 1s;
+    animation-name: scalingTitle;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
 h1 {
     font-size: 600%;
     text-align: center;
@@ -24,23 +39,39 @@ h1 {
     text-align: center;
 }
 
-.button {
+button {
     padding: 15px 32px;
     text-align: center;
     width: 700px;
     height: 200px;
-    color:burlywood;
+    color: rgb(230, 184, 135);
     background-color: rgba(132, 66, 30, 0.9);
     font-size: 80px;
     border: 5px solid rgb(230, 184, 135);
+    transition-duration: 0.4s;
+}
+button:hover{
+    transform: scale(1.05);
+    background-color:  rgb(230, 184, 135, 0.9);
+    border-color: rgba(132, 66, 30, 0.9);
+    color:rgb(132, 66, 30, 0.9);
+    }
+button:hover::before{
+    content: "⮚";
+    transition-duration: 0.4s;
+}
+button:hover::after{
+    content: "⮘";
+    transition-duration: 0.4s;
 }
 
+
 .table {
-    position: absolute;
-    right: 0px;
-    bottom: 0px;
-    float: right;
+    position: fixed;
+    left: 40px;
+    top: 50px;
 }
+
 
 .statistics {
     list-style: none;
@@ -49,4 +80,13 @@ h1 {
     padding: 0px;
     color:burlywood;
     background-color: rgba(132, 66, 30, 0.9)
+}
+@keyframes scalingTitle {
+    from {
+      transform: scale(1.0);
+    }
+  
+    to {
+        transform: scale(1.1);
+    }
 }

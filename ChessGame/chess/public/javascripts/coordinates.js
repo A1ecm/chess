@@ -9,9 +9,11 @@ function main() {
     "use strict";
 
     $(".chessboard td").on("click", function (event) {
-        if (selected == false) {
+        console.log(selected);
+        if (selected == false || nextPossible == undefined) {
             selectNewPiece(event);
             selPiece = event.target.id;
+            
             selected = true;
         }
         else {
@@ -33,7 +35,13 @@ function main() {
                     socketSend(outgoingMsg);
                     selected = false;
                     i = nextPossible.length;
+                    
                 }
+                else {
+                    selected = false;
+                    $("layer.layer").css("background-color","");
+                }
+
             }
             if (selected == true) {
                 selectNewPiece(event);
@@ -59,3 +67,4 @@ function selectNewPiece(event) {
 function arrayInput(nextMoves) {
     nextPossible = nextMoves;
 }
+

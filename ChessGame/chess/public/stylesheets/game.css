@@ -5,7 +5,7 @@
     -ms-user-select:none;
     -o-user-select:none;
     user-select:none;
-
+    font-family: "Calibri", sans-serif;
   }
   
   main{
@@ -24,7 +24,7 @@
     width: 70px;
     height: 70px;
     border: 2px solid #84421e;
-    font-size: 400%;
+    font-size: 390%;
     text-align: center;
     padding: 0px;
   }
@@ -36,7 +36,7 @@
   }
   section.window {
     /* padding: 10px; */
-    background: rgb(196, 196, 196);
+    background: rgb(94, 91, 91);
     width: 300px;
     height: 592px;
     float: right;
@@ -46,7 +46,9 @@
   .changeGame{
     width: 280px;
     margin: auto;
-    
+    position: relative;
+    left: 46px;
+    top: 5px;
   }
   .changeGame button {
     background: rgb(212, 212, 212);
@@ -68,32 +70,55 @@
     object-fit: cover;
   }
   .window h2{
-    color: grey;
-    margin-left: 20px;
+    color: rgb(189, 189, 189);
+    position: relative;
+    left: 20px;
     font: 400 40px/1.2 'Merienda One', Helvetica, sans-serif;  
   }
+  .window h2::after{
+    content: "★ ";
+  }
   div.movesWindow{
-    height: 60%;
+    height: 55%;
     background-color: white;
     border-top: 0.8px solid rgb(59, 59, 59);
     border-bottom: 0.8px solid rgb(59, 59, 59);
-    overflow: scroll;            
+    overflow-y: scroll;            
+    overflow-x: hidden;          
   }
   table.movesTable{
     background: white;
     width: 300px;
+    position: static;
   }
   td.movesTable{
     border: 0px;
     height: 35px;
   }
-  tr.movesTable:nth-child(even){
-    background: rgb(243, 243, 243);
-    border: 0px;
+  tr.movesTable{
+    height: 35px;
+  }
+  .movesWindow tr{
+    height: 35px;
+    font: 17px bold;
+    background: rgb(212, 212, 212);
+
+  }
+  .movesWindow tr:nth-child(odd){
+    background-color: white;
   }
  
   .layer{
     width: 100%;
     height: 100%;
   }
+
+  #p2show{
+    top: 20px;
+  }
+
+  #totalwindow{
+    overflow-x: hidden;
+  }
+  
   

@@ -45,6 +45,7 @@ function showMoves(ids) {
 
 
 
+
 //set everything up, including the WebSocket
 (function setup(){
     console.log(Setup.WEB_SOCKET_URL);
@@ -64,8 +65,12 @@ function showMoves(ids) {
         console.log(gs.getPlayerType());
         
         if( incomingMsg.type == Messages.T_AVAILABLE_MOVES){
+            console.log(incomingMsg.data);
             showMoves(incomingMsg.data);
             arrayInput(incomingMsg.data);
+        }
+        if(incomingMsg.type == Messages.T_NOT_YOUR_MOVE){
+            console.log(incomingMsg.data);
         }
 
         if(incomingMsg.type == Messages.T_MOVE_MADE){
@@ -75,8 +80,36 @@ function showMoves(ids) {
             document.getElementById(incomingMsg.data[0]).innerHTML = "";
         }
 
+        if(incomingMsg.type == Messages.T_HISTORY){
+            var pastmoves = incomingMsg.data;
+            for(var i = document.getElementById("movesTable").rows.length; i > 0;i--){
+                document.getElementById("movesTable").deleteRow(i -1);
+            }
+            var table = document.getElementById("movesTable");
+            var row = table.insertRow(0);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            cell1.innerHTML = "Count";
+            cell2.innerHTML = "White";
+            cell3.innerHTML = "Black";
+
+            for(let c = 0; c < pastmoves.length -(c+1); c++){
+                var table = document.getElementById("movesTable");
+                var row = table.insertRow(c+1);
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                var cell3 = row.insertCell(2);
+                cell1.innerHTML = c+1;
+                cell2.innerHTML = pastmoves[2*c];
+                cell3.innerHTML = pastmoves[2*c+1];
+            }
+        }
+
         if(incomingMsg.type == Messages.T_GAME_WON_BY) {
             alert(incomingMsg.data + " won the game!");
+            window.location="../splash.html";
+
         }
     };
 

@@ -50,7 +50,7 @@ wss.on("connection", function connection(ws) {
     /*
      * two-player game: every two players are added to the same game
      */
-    let con = ws; 
+    let con = ws;
     con.id = connectionID++;
     let playerType = currentGame.addPlayer(con);
     websockets[con.id] = currentGame;
@@ -59,7 +59,7 @@ wss.on("connection", function connection(ws) {
 
     /*
      * inform the client about its assigned player type
-     */ 
+     */
     con.send((playerType == "A") ? messages.S_PLAYER_A : messages.S_PLAYER_B);
 
 
@@ -67,7 +67,7 @@ wss.on("connection", function connection(ws) {
      * once we have two players, there is no way back; 
      * a new game object is created;
      * if a player now leaves, the game is aborted (player is not preplaced)
-     */ 
+     */
     if (currentGame.hasTwoConnectedPlayers()) {
         currentGame = new Game(gameStatus.gamesInitialized++);
     }
@@ -76,47 +76,111 @@ wss.on("connection", function connection(ws) {
      *  1. determine the game object
      *  2. determine the opposing player OP
      *  3. send the message to OP 
-     */ 
+     */
     con.on("message", function incoming(message) {
         let oMsg = JSON.parse(message);
- 
+
         let gameObj = websockets[con.id];
-        let isPlayerA = (gameObj.playerA == con) ? true:false;
+        let isPlayerA = (gameObj.playerA == con) ? true : false;
 
         //incoming message with which piece is selected returns an array with possible moves                                        
+
         if (oMsg.type == messages.T_SELECT_A_PIECE) {
             console.log("selected piece: " + oMsg.data);
-            
-            let msg = messages.O_AVAILABLE_MOVES;
-            msg.data = gameObj.getMoves(oMsg.data);
-            console.log(gameObj.getMoves(oMsg.data));
-            con.send(JSON.stringify(msg));
+            let turn = gameObj.turn(oMsg.data);
+
+            if (playerType == "A" && turn == 'w') {
+                let msg = messages.O_AVAILABLE_MOVES;
+                msg.data = gameObj.getMoves(oMsg.data);
+                console.log(gameObj.getMoves(oMsg.data));
+                con.send(JSON.stringify(msg));
+            }
+            if (playerType == "A" && turn == 'b') {
+                con.send(messages.S_NOT_YOUR_MOVE);
+            }
+
+            if (playerType == "B" && turn == 'b') {
+                let msg = messages.O_AVAILABLE_MOVES;
+                msg.data = gameObj.getMoves(oMsg.data);
+                console.log(gameObj.getMoves(oMsg.data));
+                con.send(JSON.stringify(msg));
+
+            }
+            if (playerType == "B" && turn == 'w') {
+                con.send(messages.S_NOT_YOUR_MOVE);
+            }
+
         }
 
-        if(oMsg.type == messages.T_MAKE_A_MOVE) {
+        if (oMsg.type == messages.T_MAKE_A_MOVE) {
             console.log("Move made by ", playerType);
+            let turn = gameObj.turn(oMsg.data[0]);
 
-            gameObj.makeMove(oMsg.data);
-            
-            let moveMsg = messages.O_MOVE_MADE;
-            moveMsg.data = oMsg.data;
-            gameObj.playerA.send(JSON.stringify(moveMsg));
-            gameObj.playerB.send(JSON.stringify(moveMsg));
-            
-            if(gameObj.checkmate()){
-                let winMsg = messages.O_GAME_WON_BY;
-                console.log(playerType + " won");
-                var winner = playerType;
-                winMsg.data = winner;
-                
-                gameObj.playerA.send(JSON.stringify(winMsg));
-                gameObj.playerB.send(JSON.stringify(winMsg));
+            if (playerType == "A" && turn == 'w') {
+
+                gameObj.makeMove(oMsg.data);
+
+                let moveMsg = messages.O_MOVE_MADE;
+                moveMsg.data = oMsg.data;
+                gameObj.playerA.send(JSON.stringify(moveMsg));
+                gameObj.playerB.send(JSON.stringify(moveMsg));
+
+                if (gameObj.checkmate()) {
+                    let winMsg = messages.O_GAME_WON_BY;
+                    console.log(playerType + " won");
+                    var winner = playerType;
+                    winMsg.data = winner;
+
+                    gameObj.playerA.send(JSON.stringify(winMsg));
+                    gameObj.playerB.send(JSON.stringify(winMsg));
+                }
             }
+            if (playerType == "A" && turn == 'b') { con.send(messages.S_NOT_YOUR_MOVE); }
+            if (playerType == "B" && turn == 'b') {
+
+                gameObj.makeMove(oMsg.data);
+
+                let moveMsg = messages.O_MOVE_MADE;
+                moveMsg.data = oMsg.data;
+                gameObj.playerA.send(JSON.stringify(moveMsg));
+                gameObj.playerB.send(JSON.stringify(moveMsg));
+
+                if (gameObj.checkmate()) {
+                    let winMsg = messages.O_GAME_WON_BY;
+                    console.log(playerType + " won");
+                    var winner = playerType;
+                    winMsg.data = winner;
+
+                    gameObj.playerA.send(JSON.stringify(winMsg));
+                    gameObj.playerB.send(JSON.stringify(winMsg));
+                }
+
+                let historyMsg = messages.O_HISTORY;
+                historyMsg.data = gameObj.getHistory();
+                gameObj.playerA.send(JSON.stringify(historyMsg));
+                gameObj.playerB.send(JSON.stringify(historyMsg));
+            }
+            if (playerType == "B" && turn == 'w') { con.send(messages.S_NOT_YOUR_MOVE); }
+
+        }
+
+        if(oMsg.type == messages.T_FORFEIT){
+            let winMsg = messages.O_GAME_WON_BY;
+            if(playerType == "A")
+            var winner = "B";
+            if(playerType == "B")
+            var winner = "A";
+            console.log(winner + " won");
+            
+            winMsg.data = winner;
+
+            gameObj.playerA.send(JSON.stringify(winMsg));
+            gameObj.playerB.send(JSON.stringify(winMsg));
         }
     });
 
     con.on("close", function (code) {
-        
+
         /*
          * code 1001 means almost always closing initiated by the client;
          * source: https://developer.mozilla.org/en-US/docs/Web/API/CloseEvent
@@ -130,7 +194,7 @@ wss.on("connection", function connection(ws) {
             let gameObj = websockets[con.id];
 
             if (gameObj.isValidTransition(gameObj.gameState, "ABORTED")) {
-                gameObj.setStatus("ABORTED"); 
+                gameObj.setStatus("ABORTED");
                 gameStatus.gamesAborted++;
 
                 /*
@@ -141,19 +205,19 @@ wss.on("connection", function connection(ws) {
                     gameObj.playerA.close();
                     gameObj.playerA = null;
                 }
-                catch(e){
-                    console.log("Player A closing: "+ e);
+                catch (e) {
+                    console.log("Player A closing: " + e);
                 }
 
                 try {
-                    gameObj.playerB.close(); 
+                    gameObj.playerB.close();
                     gameObj.playerB = null;
                 }
-                catch(e){
+                catch (e) {
                     console.log("Player B closing: " + e);
-                }                
+                }
             }
-            
+
         }
     });
 });
