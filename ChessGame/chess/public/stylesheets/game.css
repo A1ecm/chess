@@ -77,6 +77,12 @@
   }
   .window h2::after{
     content: "★ ";
+    color: rgb(94, 91, 91);
+  }
+
+  .window h2.player::after{
+    content: "★ ";
+    color: rgb(189, 189, 189);
   }
   div.movesWindow{
     height: 55%;
@@ -113,7 +119,7 @@
     height: 100%;
   }
 
-  #p2show{
+  #pBshow{
     top: 20px;
   }
 

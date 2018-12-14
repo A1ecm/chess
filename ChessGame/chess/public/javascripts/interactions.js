@@ -61,6 +61,10 @@ function showMoves(ids) {
         //set player type
         if (incomingMsg.type == "PLAYER-TYPE") {
             gs.setPlayerType(incomingMsg.data);
+            alert("You are player: " + gs.getPlayerType());
+            //var element = document.getElementById("p"+gs.getPlayerType()+"show");
+            //element.style.fontWeight = 800;
+            $("#p"+gs.getPlayerType()+"show").toggleClass('player');
         }
         console.log(gs.getPlayerType());
         
