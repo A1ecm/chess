@@ -126,3 +126,12 @@
   #totalwindow{
     overflow-x: hidden;
   }
+  #fs-toggle:not(:-webkit-full-screen) {
+    float: right;
+    background-color: burlywood;
+  }
+
+  #fs-toggle:-webkit-full-screen {
+    float: right;
+    background-color: #84421e;
+  }
