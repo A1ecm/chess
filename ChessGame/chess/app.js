@@ -16,11 +16,10 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 
 app.get("/play", indexRouter);
-app.get("/", indexRouter);
 
-// app.get("/", (req, res) => {
-//     res.render("splash.ejs", { gamesInitialized: gameStatus.gamesInitialized, gamesCompleted: gameStatus.gamesCompleted });
-// });
+app.get("/", (req, res) => {
+    res.render("splash.ejs", { gamesInitialized: gameStatus.gamesInitialized, gamesAborted: gameStatus.gamesAborted });
+});
 
 var server = http.createServer(app);
 const wss = new websocket.Server({ server });

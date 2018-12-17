@@ -60,11 +60,8 @@ function showMoves(ids) {
 
     var gs = new GameState(socket);
 
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    console.log(ca);
-    var visits = ca.length-1;
-    document.getElementById("visits").innerHTML = visits;
+
+
     // return TODO possibly create a GameState object here
 
     socket.onmessage = function (event) {
@@ -147,6 +144,9 @@ function showMoves(ids) {
 
     socket.onopen = function () {
         socket.send("{}");
+        let cookiesArray = document.cookie.split("; ");
+        let counter = cookiesArray.length - 1;
+        document.getElementById("visits").innerHTML = "You have been here " + counter + " times before";
 
     };
 
@@ -154,10 +154,11 @@ function showMoves(ids) {
     };
 
     socket.onclose = function () {
+        let countDownDate = new Date().getTime();
+        document.cookie = countDownDate + "=null;  expires=Fri, 24-Jan-2019 12:45:00 GMT";
         if (gs.whoWon() == null) {
             abortGame();
         }
-        document.cookie = new Date(); "expires=Thu, 18 Dec 2019 12:00:00 UTC";
     };
 
 })();
@@ -165,7 +166,7 @@ function showMoves(ids) {
 async function winGame(winner) {
     alert("Player " + winner + " wins!");
     await sleep(5000);
-    window.location = "../splash.html";
+    window.location = "../";
 }
 
 async function askDraw(player) {
@@ -184,13 +185,13 @@ async function askDraw(player) {
 async function drawGame() {
     alert("It's a draw");
     await sleep(5000);
-    window.location = "../splash.html";
+    window.location = "../";
 }
 
 async function abortGame() {
     alert("Game aborted");
     await sleep(5000);
-    window.location = "../splash.html";
+    window.location = "../";
 }
 
 function sleep(ms) {

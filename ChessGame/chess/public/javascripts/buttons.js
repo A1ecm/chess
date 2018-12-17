@@ -4,7 +4,7 @@ function forfeit(){
 }
 
 function goMain(){
-    window.location="../splash.html";
+    window.location="../";
 }
 
 function draw(){
